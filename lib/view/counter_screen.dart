@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/counter_provider.dart';
 
 class CounterScreen extends StatefulWidget {
   const CounterScreen({super.key});
@@ -8,10 +11,9 @@ class CounterScreen extends StatefulWidget {
 }
 
 class _CounterScreenState extends State<CounterScreen> {
-  int count = 0;
-
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Counter App"),
@@ -23,13 +25,11 @@ class _CounterScreenState extends State<CounterScreen> {
           mainAxisAlignment: .center,
           crossAxisAlignment: .center,
           children: [
-            Text("$count", style: TextStyle(fontSize: 40, color: Colors.teal)),
+            Text("${context.watch<CounterProvider>().count}", style: TextStyle(fontSize: 40, color: Colors.teal)),
             SizedBox(height: 150),
             GestureDetector(
               onTap: () {
-                setState(() {
-                  count++;
-                });
+                context.read<CounterProvider>().updateCount();
               },
               child: Container(
                 height: 50,
@@ -48,9 +48,7 @@ class _CounterScreenState extends State<CounterScreen> {
             SizedBox(height: 30),
             GestureDetector(
               onTap: () {
-                setState(() {
-                  count = 0;
-                });
+                context.read<CounterProvider>().resetCount();
               },
               child: Container(
                 height: 50,
