@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/counter_provider.dart';
 
-class CounterScreen extends StatefulWidget {
+class CounterScreen extends ConsumerWidget {
   const CounterScreen({super.key});
 
   @override
-  State<CounterScreen> createState() => _CounterScreenState();
-}
-
-class _CounterScreenState extends State<CounterScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final Counter = ref.watch(counterProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -25,11 +22,11 @@ class _CounterScreenState extends State<CounterScreen> {
           mainAxisAlignment: .center,
           crossAxisAlignment: .center,
           children: [
-            Text("${context.watch<CounterProvider>().count}", style: TextStyle(fontSize: 40, color: Colors.teal)),
+            Text("$Counter", style: TextStyle(fontSize: 40, color: Colors.teal)),
             SizedBox(height: 150),
             GestureDetector(
               onTap: () {
-                context.read<CounterProvider>().updateCount();
+                ref.read(counterProvider.notifier).state++;
               },
               child: Container(
                 height: 50,
@@ -48,7 +45,7 @@ class _CounterScreenState extends State<CounterScreen> {
             SizedBox(height: 30),
             GestureDetector(
               onTap: () {
-                context.read<CounterProvider>().resetCount();
+                ref.read(counterProvider.notifier).state = 0;
               },
               child: Container(
                 height: 50,

@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:leaning/provider/counter_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:leaning/view/counter_screen.dart';
-import 'package:provider/provider.dart';
+
+/// For Provider
+
+// void main() {
+//   runApp(
+//     MultiProvider(
+//       providers: [
+//         ChangeNotifierProvider(create: (context) => CounterProvider()),
+//       ],
+//       child: MyApp(),
+//     ),
+//   );
+// }
+
+/// For Riverpod
 
 void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => CounterProvider()),
-      ],
-      child: MyApp(),
-    ),
-  );
+  runApp(ProviderScope(child: MyApp()));
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

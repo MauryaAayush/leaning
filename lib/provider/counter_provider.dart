@@ -1,17 +1,23 @@
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
+//
+// class CounterProvider with ChangeNotifier {
+//   int _count = 0;
+//
+//   int get count => _count;
+//
+//   void updateCount() {
+//     _count++;
+//     notifyListeners();
+//   }
+//
+//   void resetCount() {
+//     _count = 0;
+//     notifyListeners();
+//   }
+// /
 
-class CounterProvider with ChangeNotifier {
-  int _count = 0;
+import 'package:flutter_riverpod/legacy.dart';
 
-  int get count => _count;
-
-  void updateCount() {
-    _count++;
-    notifyListeners();
-  }
-
-  void resetCount() {
-    _count = 0;
-    notifyListeners();
-  }
-}
+final counterProvider = StateProvider<int>((ref) {
+  return 0;
+});
